@@ -7,12 +7,33 @@ adjacent = float(input("Enter horizontal distance (m): "))
 angle_deg = float(input("Enter angle of elevation (deg): "))
 
 # --- Convert angle to radians ---
-angle_rad = math.radians(angle_deg)
+class angle_rad:
+	"""Represent an angle supplied in degrees and provide radian trig values."""
+
+	def __init__(self, degrees):
+		self.degrees = float(degrees)
+
+	def radians(self):
+		return math.radians(self.degrees)
+
+	def sin(self):
+		return math.sin(self.radians())
+
+	def cos(self):
+		return math.cos(self.radians())
+
+	def tan(self):
+		return math.tan(self.radians())
+
+
+angle = angle_rad(angle_deg)
 
 # --- Calculations ---
-height = adjacent * math.tan(angle_rad)
-hypotenuse = adjacent / math.cos(angle_rad)
+height = adjacent * angle.tan()
+hypotenuse = adjacent / angle.cos()
 
 # --- Outputs ---
 print(f"Height of tower: {height:.2f} m")
 print(f"Line-of-sight: {hypotenuse:.2f} m")
+
+
