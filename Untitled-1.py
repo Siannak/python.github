@@ -1,26 +1,19 @@
- #pressure vessel
+pressure = float(input("Enter internal pressure (bar): "))
+temperature = float(input("Enter wall temperature (°C): "))
+vibration = float(input("Enter vibration level (mm/s): "))
 
-internal_pressure = float(input("Enter internal pressure (psi): "))
-wall_temperature = float(input("Enter wall temperature (C): "))
-vibration_level = float(input("Enter vibration level (mm/s): "))
+reasons = []
 
+if not 5 <= pressure <= 15:
+	reasons.append("internal pressure must be between 5 and 15 bar")
+if not 20 <= temperature <= 250:
+	reasons.append("wall temperature must be between 20 and 250 °C")
+if vibration >= 4:
+	reasons.append("vibration level must be below 4 mm/s")
 
-def internal_pressure_ok(pressure):     
-        """Return True when pressure is within the safe operating range."""
-        return 5 <= pressure <= 10
-
-
-internal_pressure_is_safe = internal_pressure_ok(internal_pressure)
-wall_temperature_ok = 20 <= wall_temperature <= 250
-vibration_level_ok = vibration_level < 4
-
-if internal_pressure_is_safe and wall_temperature_ok and vibration_level_ok:
-    print("System is SAFE.")
+if reasons:
+	print("The pressure vessel is unsafe.")
+	for reason in reasons:
+		print(f"- {reason}")
 else:
-    print("System is UNSAFE.")
-    if not internal_pressure_is_safe:
-        print(" - Internal pressure out of range")
-    if not wall_temperature_ok:
-        print(" - Wall temperature out of range")
-    if not vibration_level_ok:
-        print(" - Vibration out of range")
+	print("The pressure vessel is safe.")
